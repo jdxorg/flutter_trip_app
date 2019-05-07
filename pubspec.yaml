@@ -29,7 +29,7 @@ dependencies:
   # 路由管理
   fluro: "^1.4.0"
   fluttertoast: ^3.0.1
-  android_intent: ^0.3.0
+  flutter_swiper: ^1.0.6
 
 dev_dependencies:
   flutter_test:

@@ -13,7 +13,8 @@ class SysStringZh extends SysStringBase {
   String my_tab = '我的';
   @override
   String customer_tab = '客服';
-
+  @override 
+  String double_click_exit='再按一次退出';
   @override
   String welcomeMessage = "Welcome To Flutter";
 

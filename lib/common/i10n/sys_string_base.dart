@@ -5,6 +5,7 @@ abstract class SysStringBase {
   String photo_tab;
   String my_tab;
   String customer_tab;
+  String double_click_exit;
 
   String welcomeMessage;
 
