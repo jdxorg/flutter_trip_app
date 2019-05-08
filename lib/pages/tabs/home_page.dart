@@ -3,8 +3,8 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_trip_app/pages/widget/home/banner.dart';
-import 'package:flutter_trip_app/entity/BannerEntityList.dart';
-import 'package:flutter_trip_app/entity/NavbarEntityList.dart';
+import 'package:flutter_trip_app/entity/BannerEntity.dart';
+import 'package:flutter_trip_app/entity/NavbarEntity.dart';
 import 'package:flutter_trip_app/service/BLL/tripBLL.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -14,26 +14,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  BannerEntityList _bannerEntityList;
-  NavbarEntityList _navbarEntityList;
-  Future load() async {
-    try{
-       
-      BannerEntityList bannerEntityList = await TripBLL().getBanner();
+  List<BannerEntity> _banners = [];
+  List<NavbarEntity> _navbars = [];
 
-      NavbarEntityList navbarEntityList = await TripBLL().getNavbar();
+  Future load() async {
+    try {
+      List<BannerEntity> bannerEntityList = await TripBLL().getBanner();
+
+      // List<NavbarEntity> navbarEntityList = await TripBLL().getNavbar();
+      if (!mounted) return;
       setState(() {
-        _bannerEntityList = bannerEntityList;
-        _navbarEntityList = navbarEntityList;
+        _banners = bannerEntityList;
+        // _navbars = navbarEntityList;
       });
-    }catch(error){
-      return null;
+    } catch (error) {
+      throw (error);
     }
   }
+
   @override
   void initState() {
-    load();
     super.initState();
+    load();
   }
 
   @override
@@ -42,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: ListView(
         padding: const EdgeInsets.only(top: 0.0),
         children: <Widget>[
-          HomeBanner(_bannerEntityList.banners,_navbarEntityList.navbars),
+          HomeBanner(banners: _banners, navbars: _navbars),
         ],
       ),
     );

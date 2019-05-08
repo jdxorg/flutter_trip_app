@@ -12,7 +12,6 @@ import 'dart:async';
  *  - 统一打印报错信息；
  */
 class HttpUtils {
-
   /// global dio object
   static Dio dio;
 
@@ -29,12 +28,19 @@ class HttpUtils {
   static const String DELETE = 'delete';
   static const String tokenType = 'bearer';
   static const String accessToken = 'da1eb8f4-ae74-43cb-bd1b-6addf0a53e5f';
+
   /// request method
-  static Future<Map> request ( String url, { data, method ,headers }) async {
+  static Future<Map> request(String url, {data, method, headers}) async {
     data = data ?? {};
     method = method ?? 'GET';
-    headers = headers ?? {'Authorization': '${tokenType} $accessToken','appName':'Wechat_Diet_Recommend_Mini_Program','content-type': 'application/x-www-form-urlencoded'};
-    /// restful 请求处理   
+    headers = headers ??
+        {
+          'Authorization': '${tokenType} $accessToken',
+          'appName': 'Wechat_Diet_Recommend_Mini_Program',
+          'content-type': 'application/x-www-form-urlencoded'
+        };
+
+    /// restful 请求处理
     /// /gysw/search/hist/:user_id        user_id=27
     /// 最终生成 url 为     /gysw/search/hist/27
     data.forEach((key, value) {
@@ -51,30 +57,29 @@ class HttpUtils {
     var result;
 
     try {
-      Response response = await dio.request(url, data: data, options: new Options(method: method,headers: headers));
+      Response response = await dio.request(url,
+          data: data, options: new Options(method: method, headers: headers));
 
       result = response.data;
 
       /// 打印响应相关信息
-      print(result);
-      print(response.data is String);
-      // print('响应数据：' + result.toString());
+      print('响应数据：' + result.toString());
     } on DioError catch (e) {
       /// 打印请求失败相关信息
       print('请求出错：' + e.toString());
-    } 
+    }
 
     return result;
   }
 
   /// 创建 dio 实例对象
-  static Dio createInstance () {
+  static Dio createInstance() {
     if (dio == null) {
       /// 全局属性：请求前缀、连接超时时间、响应超时时间
       BaseOptions options = new BaseOptions(
-          baseUrl: API_PREFIX,
-          connectTimeout: CONNECT_TIMEOUT,
-          receiveTimeout: RECEIVE_TIMEOUT,
+        baseUrl: API_PREFIX,
+        connectTimeout: CONNECT_TIMEOUT,
+        receiveTimeout: RECEIVE_TIMEOUT,
       );
       dio = new Dio(options);
     }
@@ -83,8 +88,7 @@ class HttpUtils {
   }
 
   /// 清空 dio 对象
-  static clear () {
+  static clear() {
     dio = null;
   }
-
 }

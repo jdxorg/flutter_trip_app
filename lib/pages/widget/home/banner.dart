@@ -7,13 +7,10 @@ import 'package:flutter_trip_app/common/constraints/sys_style.dart';
 import 'package:flutter_trip_app/entity/BannerEntity.dart';
 import 'package:flutter_trip_app/entity/NavbarEntity.dart';
 
-class HomeBanner extends StatelessWidget{
+class HomeBanner extends StatelessWidget {
   final List<BannerEntity> banners;
   final List<NavbarEntity> navbars;
-  HomeBanner(
-    this.banners,
-    this.navbars
-  );
+  HomeBanner({this.banners, this.navbars});
   @override
   Widget build(BuildContext context) {
     return new Stack(
