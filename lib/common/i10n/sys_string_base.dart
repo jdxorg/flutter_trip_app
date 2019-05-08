@@ -7,6 +7,7 @@ abstract class SysStringBase {
   String customer_tab;
   String double_click_exit;
 
+  String search_placeholder;
   String welcomeMessage;
 
   

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SysColors{
+class SysStyle{
     static const int primaryValue = 0xFFFFFFFF;
     static const int primaryLightValue = 0xFF42464b;
     static const int primaryDarkValue = 0xFF121917;

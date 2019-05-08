@@ -10,7 +10,18 @@ class  CommonUtils {
     return ThemeData(primarySwatch: color, platform: TargetPlatform.android);
   }
 
+  ///获取本地化设置
   static SysStringBase getLocale(BuildContext context) {
     return DefaultLocalizations.of(context).currentLocalized;
+  }
+  ///加载本地json文件
+  static Future<String> loadJsonAsset(BuildContext context,String fileName) async {
+    String jsonStr;
+    try{
+      jsonStr = await DefaultAssetBundle.of(context).loadString(fileName);
+    }catch(error){
+      throw (error);
+    }
+    return jsonStr;
   }
 }

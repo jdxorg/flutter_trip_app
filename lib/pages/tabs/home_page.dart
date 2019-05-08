@@ -2,7 +2,10 @@
  * 首页
  */
 import 'package:flutter/material.dart';
-import 'package:flutter_trip_app/widget/swiper_widget.dart';
+import 'package:flutter_trip_app/pages/widget/home/banner.dart';
+import 'package:flutter_trip_app/entity/BannerEntityList.dart';
+import 'package:flutter_trip_app/entity/NavbarEntityList.dart';
+import 'package:flutter_trip_app/service/BLL/tripBLL.dart';
 
 class MyHomePage extends StatefulWidget {
   static final String sName = 'home';
@@ -11,15 +14,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> imageList;
+  BannerEntityList _bannerEntityList;
+  NavbarEntityList _navbarEntityList;
+  Future load() async {
+    try{
+       
+      BannerEntityList bannerEntityList = await TripBLL().getBanner();
+
+      NavbarEntityList navbarEntityList = await TripBLL().getNavbar();
+      setState(() {
+        _bannerEntityList = bannerEntityList;
+        _navbarEntityList = navbarEntityList;
+      });
+    }catch(error){
+      return null;
+    }
+  }
   @override
   void initState() {
-    imageList = [
-      'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2726034926,4129010873&fm=26&gp=0.jpg',
-      'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3485348007,2192172119&fm=26&gp=0.jpg',
-      'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2594792439,969125047&fm=26&gp=0.jpg',
-      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=190488632,3936347730&fm=26&gp=0.jpg',
-    ];
+    load();
     super.initState();
   }
 
@@ -27,12 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Container(
       child: ListView(
+        padding: const EdgeInsets.only(top: 0.0),
         children: <Widget>[
-          SwiperWidget(
-            imageList,
-            paginationMargin: const EdgeInsets.fromLTRB(0, 0, 20, 60),
-            onItemTap: (index) => print('$index'),
-          ),
+          HomeBanner(_bannerEntityList.banners,_navbarEntityList.navbars),
         ],
       ),
     );

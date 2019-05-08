@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';   
+import 'package:flutter_trip_app/entity/BannerEntity.dart';   
 /**
  * Swiper({
     this.itemBuilder,
@@ -40,7 +41,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 typedef void OnItemTap(int index);
 typedef void OnIndexChanged(int index);
 class SwiperWidget extends StatefulWidget {
-  final List<String> imageList;
+  final List<BannerEntity> imageList;
   final Axis scrollDirection;
   final bool autoplay;
   final double width;
@@ -94,7 +95,7 @@ class SwiperWidget extends StatefulWidget {
 }
 
 class _SwiperViewState extends State<SwiperWidget> {
-  final List<String> _imageList;
+  final List<BannerEntity> _imageList;
   final Axis _scrollDirection;
   final bool _autoplay;
   final double _width;
@@ -166,7 +167,7 @@ class _SwiperViewState extends State<SwiperWidget> {
     return Container(                     // 用Container实现图片圆角的效果
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(_imageList[index]),  // 图片数组
+          image: NetworkImage(_imageList[index].image),  // 图片数组
           fit: BoxFit.cover,
         ),
         borderRadius: !_showRadius?BorderRadius.circular( 0 ):_borderRadius,

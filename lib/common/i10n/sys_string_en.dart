@@ -15,6 +15,9 @@ class SysStringEn extends SysStringBase {
   String customer_tab = 'customer';
   @override 
   String double_click_exit='Press exit again';
+
+  @override
+  String search_placeholder='Please enter content';
   @override
   String welcomeMessage = "Welcome To Flutter";
   

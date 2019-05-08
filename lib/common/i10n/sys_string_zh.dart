@@ -15,6 +15,9 @@ class SysStringZh extends SysStringBase {
   String customer_tab = '客服';
   @override 
   String double_click_exit='再按一次退出';
+  
+  @override
+  String search_placeholder = '请输入内容';
   @override
   String welcomeMessage = "Welcome To Flutter";
 

@@ -56,7 +56,9 @@ class HttpUtils {
       result = response.data;
 
       /// 打印响应相关信息
-      print('响应数据：' + response.toString());
+      print(result);
+      print(response.data is String);
+      // print('响应数据：' + result.toString());
     } on DioError catch (e) {
       /// 打印请求失败相关信息
       print('请求出错：' + e.toString());
