@@ -3,7 +3,7 @@
  */
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_trip_app/pages/widget/home/menu.dart';
 
 class MyPage extends StatelessWidget{
   static final String sName='my';
@@ -13,6 +13,9 @@ class MyPage extends StatelessWidget{
       appBar: new AppBar(
         title: new Text('MyPage'),
       ),
+      body: new HomeMenu(),
     );
   }
 }
+
+

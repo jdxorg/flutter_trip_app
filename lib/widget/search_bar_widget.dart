@@ -15,24 +15,18 @@ class SearchBarWidget extends StatefulWidget {
   final OnTap onTap;
 
   SearchBarWidget(
-      {this.hintText,
+      {Key key,
+        this.hintText,
       this.onChangeCallBack,
       this.onEditingCompleteCallBack,
       this.onSubmitted,
-      this.onTap});
+      this.onTap}):super(key:key);
   @override
-  _State createState() => new _State(this.hintText, this.onChangeCallBack,
-      this.onEditingCompleteCallBack, this.onSubmitted, this.onTap);
+  _State createState() => new _State();
 }
 
 class _State extends State<SearchBarWidget> {
-  final String _hintText;
-  final OnChangeCallBack _onChangeCallBack;
-  final OnEditingCompleteCallBack _onEditingCompleteCallBack;
-  final OnSubmitted _onSubmitted;
-  final OnTap _onTap;
-  _State(this._hintText, this._onChangeCallBack,
-      this._onEditingCompleteCallBack, this._onSubmitted, this._onTap);
+  TextEditingController controller = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -52,6 +46,7 @@ class _State extends State<SearchBarWidget> {
         ],
       ),
       child: TextField(
+        controller:controller,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 2.0),
@@ -66,7 +61,7 @@ class _State extends State<SearchBarWidget> {
             color: Colors.grey,
           ),
           hintText:
-              _hintText ?? CommonUtils.getLocale(context).search_placeholder,
+              widget.hintText ?? CommonUtils.getLocale(context).search_placeholder,
           hintStyle: TextStyle(
             fontSize: 20,
             color: Colors.grey,
@@ -77,10 +72,10 @@ class _State extends State<SearchBarWidget> {
           // isDense: false
           border: InputBorder.none,
         ),
-        onChanged: _onChangeCallBack,
-        onEditingComplete: _onEditingCompleteCallBack,
-        onSubmitted: _onSubmitted,
-        onTap: _onTap,
+        onChanged: widget.onChangeCallBack,
+        onEditingComplete: widget.onEditingCompleteCallBack,
+        onSubmitted: widget.onSubmitted,
+        onTap: widget.onTap,
         // textInputAction: TextInputAction.unspecified,//键盘模式
         // style: TextStyle(
         //   backgroundColor: Colors.red

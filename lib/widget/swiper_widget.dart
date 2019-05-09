@@ -66,8 +66,10 @@ class SwiperWidget extends StatefulWidget {
   ///是否显示圆角图片
   final bool showRadius;
   final BorderRadiusGeometry borderRadius;
-  SwiperWidget(this.imageList,
-      {this.scrollDirection = Axis.horizontal,
+  SwiperWidget(
+      {Key key,
+      this.imageList,
+      this.scrollDirection = Axis.horizontal,
       this.autoplay = true,
       this.width,
       this.height = 300,
@@ -78,53 +80,12 @@ class SwiperWidget extends StatefulWidget {
       this.showRadius = false,
       this.borderRadius,
       this.onItemTap,
-      this.onIndexChanged})
-      : assert(imageList != null, 'imageList must not be null');
+      this.onIndexChanged}):super(key:key);
   @override
-  _SwiperViewState createState() => _SwiperViewState(
-      this.imageList,
-      this.scrollDirection,
-      this.autoplay,
-      this.width,
-      this.height,
-      this.paginationMargin,
-      this.pagination,
-      this.useCustomPagination,
-      this.showControlButton,
-      this.showRadius,
-      this.borderRadius,
-      this.onItemTap,
-      this.onIndexChanged);
+  _SwiperViewState createState() => _SwiperViewState();
 }
 
 class _SwiperViewState extends State<SwiperWidget> {
-  final List<BannerEntity> _imageList;
-  final Axis _scrollDirection;
-  final bool _autoplay;
-  final double _width;
-  final double _height;
-  final EdgeInsetsGeometry _paginationMargin;
-  final SwiperCustomPagination _pagination;
-  final bool _useCustomPagination;
-  final bool _showControlButton;
-  final bool _showRadius;
-  final BorderRadiusGeometry _borderRadius;
-  final OnItemTap _onItemTap;
-  final OnIndexChanged _onIndexChanged;
-  _SwiperViewState(
-      this._imageList,
-      this._scrollDirection,
-      this._autoplay,
-      this._width,
-      this._height,
-      this._paginationMargin,
-      this._pagination,
-      this._useCustomPagination,
-      this._showControlButton,
-      this._showRadius,
-      this._borderRadius,
-      this._onItemTap,
-      this._onIndexChanged);
 
   @override
   void initState() {
@@ -133,14 +94,13 @@ class _SwiperViewState extends State<SwiperWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print(_imageList);
     return firstSwiperView();
   }
 
   Widget firstSwiperView() {
     var defaultPagination = SwiperPagination(
         alignment: Alignment.bottomRight,
-        margin: _paginationMargin,
+        margin: widget.paginationMargin,
         builder: DotSwiperPaginationBuilder(
             color: Colors.black54, // 其他点的颜色
             activeColor: Colors.white, // 当前点的颜色
@@ -149,33 +109,33 @@ class _SwiperViewState extends State<SwiperWidget> {
             ));
     return Container(
       padding: const EdgeInsets.all(0.0),
-      width: _width ?? MediaQuery.of(context).size.width,
-      height: _height,
+      width: widget.width ?? MediaQuery.of(context).size.width,
+      height: widget.height,
       child: Swiper(
-        itemCount: _imageList.length,
-        itemBuilder: _swiperBuilder,
-        pagination: _useCustomPagination
-            ? _pagination ?? defaultPagination
+        itemCount: widget.imageList.length,
+        itemBuilder: swiperBuilder,
+        pagination: widget.useCustomPagination
+            ? widget.pagination ?? defaultPagination
             : defaultPagination,
         controller: SwiperController(), //用于控制 Swiper的index属性, 停止和开始自动播放.
-        control: _showControlButton ? SwiperControl() : null,
-        scrollDirection: _scrollDirection,
-        autoplay: _autoplay,
-        onTap: _onItemTap,
-        onIndexChanged: _onIndexChanged,
+        control: widget.showControlButton ? SwiperControl() : null,
+        scrollDirection: widget.scrollDirection,
+        autoplay: widget.autoplay,
+        onTap: widget.onItemTap,
+        onIndexChanged: widget.onIndexChanged,
       ),
     );
   }
 
-  Widget _swiperBuilder(BuildContext context, int index) {
+  Widget swiperBuilder(BuildContext context, int index) {
     return Container(
       // 用Container实现图片圆角的效果
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(_imageList[index].image), // 图片数组
+          image: NetworkImage(widget.imageList[index].image), // 图片数组
           fit: BoxFit.cover,
         ),
-        borderRadius: !_showRadius ? BorderRadius.circular(0) : _borderRadius,
+        borderRadius: !widget.showRadius ? BorderRadius.circular(0) : widget.borderRadius,
       ),
     );
   }
