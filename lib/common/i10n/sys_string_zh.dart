@@ -18,6 +18,30 @@ class SysStringZh extends SysStringBase {
   
   @override
   String search_placeholder = '请输入内容';
+
+  @override
+  String menu_hotel='酒店';
+  @override
+  String menu_homestay="民宿·客栈";
+  @override
+  String menu_ticket='机票·火车票+酒店';
+  @override
+  String menu_ari_ticket='机票';
+  @override
+  String menu_railway_ticket='火车票';
+  @override
+  String menu_steamer_ticket='汽车·船票';
+  @override
+  String menu_taxi='打车·租车';
+  @override
+  String menu_trip='旅游';
+  @override
+  String menu_railway_trip='高铁游';
+  @override
+  String menu_steamer_trip='游轮游';
+  @override
+  String menu_custom_trip='定制游';
+
   @override
   String welcomeMessage = "Welcome To Flutter";
 

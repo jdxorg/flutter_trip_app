@@ -49,7 +49,7 @@ class _State extends State<SearchBarWidget> {
         controller:controller,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(vertical: 2.0),
+          contentPadding: const EdgeInsets.symmetric(vertical: 6.0),
           prefixIcon: Icon(
             SysIcons.SEARCH,
             size: 35,
@@ -65,6 +65,7 @@ class _State extends State<SearchBarWidget> {
           hintStyle: TextStyle(
             fontSize: 20,
             color: Colors.grey,
+            
           ),
           // helperText: 'helperText',
           // errorText: 'errorText',

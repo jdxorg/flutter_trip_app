@@ -8,6 +8,19 @@ abstract class SysStringBase {
   String double_click_exit;
 
   String search_placeholder;
+
+  String menu_hotel;
+  String menu_homestay;
+  String menu_ticket;
+  String menu_ari_ticket;
+  String menu_railway_ticket;
+  String menu_steamer_ticket;
+  String menu_taxi;
+  String menu_trip;
+  String menu_railway_trip;
+  String menu_steamer_trip;
+  String menu_custom_trip;
+
   String welcomeMessage;
 
   

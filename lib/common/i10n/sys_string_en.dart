@@ -19,6 +19,28 @@ class SysStringEn extends SysStringBase {
   @override
   String search_placeholder='Please enter content';
   @override
+  String menu_hotel='hotel';
+  @override
+  String menu_homestay="homestay·Inn";
+  @override
+  String menu_ticket='air ticket·railway ticket + hotel';
+  @override
+  String menu_ari_ticket='air ticket';
+  @override
+  String menu_railway_ticket='railway ticket';
+  @override
+  String menu_steamer_ticket='car·steamer ticket';
+  @override
+  String menu_taxi='take taxi·rent car';
+  @override
+  String menu_trip='trip';
+  @override
+  String menu_railway_trip='railway trip';
+  @override
+  String menu_steamer_trip='steamer trip';
+  @override
+  String menu_custom_trip='custom trip';
+  @override
   String welcomeMessage = "Welcome To Flutter";
   
   @override
