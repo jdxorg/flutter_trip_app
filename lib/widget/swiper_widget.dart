@@ -72,7 +72,7 @@ class SwiperWidget extends StatefulWidget {
       this.scrollDirection = Axis.horizontal,
       this.autoplay = true,
       this.width,
-      this.height = 300,
+      this.height = 250,
       this.paginationMargin = const EdgeInsets.fromLTRB(0, 0, 20, 10),
       this.pagination,
       this.useCustomPagination = false,

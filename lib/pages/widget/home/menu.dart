@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_trip_app/utils/common_utils.dart';
+import 'package:flutter_trip_app/common/constraints/sys_style.dart';
 class HomeMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const c1_width = 150.0,c2_width=100.0, height = 70.0,radius = 15.0,spacing=2.0;
     return new Container(
-      margin: const EdgeInsets.only(top: 60.0, left: 15.0, right: 15.0),
+      margin: const EdgeInsets.only(top: 60.0, left: SysStyle.mainHorizontalPadding, right: SysStyle.mainHorizontalPadding),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

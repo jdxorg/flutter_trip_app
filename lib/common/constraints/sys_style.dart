@@ -10,7 +10,10 @@ class SysStyle{
     static const int indicatorColor = 0xFFFFFFFF;
     static const int textColor = 0xFFFFFFFF;
     static const int boxBorderColor = 0xFFFFFFFF;
-
+    ///首页水平padding
+    static const double mainHorizontalPadding = 15.0;
+    static const int mainBackground = 0xFFF5F5F5;
+    static const int mainColor = 0xFFFD915C;
     static const MaterialColor primarySwatch = const MaterialColor(
       primaryValue,
       const <int, Color>{

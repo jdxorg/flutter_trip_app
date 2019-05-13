@@ -3,9 +3,12 @@
  */
 import 'package:flutter/material.dart';
 
+class MyCustomer extends StatefulWidget{
+  @override
+  _State createState() => new _State();
+}
 
-class MyCustomer extends StatelessWidget{
-  static final String sName='customer';
+class _State extends State<MyCustomer> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context){
     return new Scaffold(
@@ -13,5 +16,13 @@ class MyCustomer extends StatelessWidget{
         title: new Text('MyCustomer'),
       ),
     );
+  }
+  @override 
+  bool get wantKeepAlive => true;
+
+  @override 
+  void initState(){
+    super.initState();
+    print('mycustom_page initState...');
   }
 }

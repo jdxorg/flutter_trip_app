@@ -4,9 +4,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_trip_app/pages/widget/home/banner.dart';
 import 'package:flutter_trip_app/pages/widget/home/menu.dart';
+import 'package:flutter_trip_app/pages/widget/home/sub_menu.dart';
+import 'package:flutter_trip_app/pages/widget/home/special.dart';
 import 'package:flutter_trip_app/entity/BannerEntity.dart';
 import 'package:flutter_trip_app/entity/NavbarEntity.dart';
 import 'package:flutter_trip_app/service/BLL/tripBLL.dart';
+import 'package:flutter_trip_app/common/constraints/sys_style.dart';
 
 class MyHomePage extends StatefulWidget {
   static final String sName = 'home';
@@ -14,7 +17,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMixin {
   var _futureBuilderFuture;
 
   Future load() async {
@@ -24,11 +27,13 @@ class _MyHomePageState extends State<MyHomePage> {
       throw (error);
     }
   }
-
+  @override
+  bool get wantKeepAlive => true;
+  
   @override
   void initState() {
     super.initState();
-
+    print('home_page initState...');
     ///用_futureBuilderFuture来保存load()的结果，以避免不必要的ui重绘
     _futureBuilderFuture = load();
   }
@@ -36,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      color: Color(SysStyle.mainBackground),
       child: ListView(
         padding: const EdgeInsets.only(top: 0.0),
         children: <Widget>[
@@ -43,7 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
             future: _futureBuilderFuture,
             builder: _buildFuture,
           ),
-          HomeMenu()
+          HomeMenu(),
+          SubMenu(),
+          Special()
         ],
       ),
     );

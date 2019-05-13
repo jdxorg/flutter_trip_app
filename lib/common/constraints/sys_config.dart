@@ -6,4 +6,5 @@ class SysConfig{
   static const int RECEIVE_TIMEOUT = 3000;
   static const String CONTENT_TYPE_FOR_JSON = 'application/json';
   static const String CONTENT_TYPE_FOR_FORM = 'application/x-www-form-urlencoded';
+
 }
