@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_trip_app/common/i10n/sys_string_base.dart';
 import 'package:flutter_trip_app/common/i10n/default_localizations.dart';
+import 'package:flutter_trip_app/route/Application.dart';
 class  CommonUtils {
   
   static getThemeData(Color color) {
@@ -23,5 +24,9 @@ class  CommonUtils {
       throw (error);
     }
     return jsonStr;
+  }
+
+  static void navigateTo(BuildContext context,String page){
+    Application.router.navigateTo(context, page);
   }
 }

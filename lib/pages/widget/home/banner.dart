@@ -17,7 +17,9 @@ Widget buildBanner(BuildContext context,
         height: swiperHeight,
         imageList: banners,
         paginationMargin: const EdgeInsets.fromLTRB(0, 0, 20, 60),
-        onItemTap: (index) => print('$index'),
+        onItemTap: (index) => {
+          
+        },
       ),
       Positioned(
         //设置子元素

@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_trip_app/pages/tabs/home_page.dart';
 import 'package:flutter_trip_app/utils/common_utils.dart';
 import 'package:flutter_trip_app/common/constraints/sys_icons.dart';
-
-
 //pages
 import 'package:flutter_trip_app/pages/tabs/customer_page.dart';
 import 'package:flutter_trip_app/pages/tabs/my_page.dart';
 import 'package:flutter_trip_app/pages/tabs/photo_page.dart';
 import 'package:flutter_trip_app/pages/tabs/travel_page.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_trip_app/redux/app_state.dart';
 
 class MainPage extends StatefulWidget {
   static final String sName='index';
@@ -31,6 +32,7 @@ class _MainPageState extends State<MainPage> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.ease,
     );
+
   }
 
   void _pageChange(int index) {
@@ -69,6 +71,15 @@ class _MainPageState extends State<MainPage> {
         type: BottomNavigationBarType.fixed,
         iconSize: 24.0,
       ),
+      floatingActionButton: new StoreConnector<AppState,VoidCallback>(builder: ( BuildContext context,VoidCallback callback ){
+        return new FloatingActionButton(
+          onPressed:callback,
+          tooltip: 'Increment',
+          child: new Icon(Icons.add),
+        );
+      }, converter: (Store<AppState> store){
+        return ()=>store.dispatch(Actions.Increment);
+      }),
     );
   }
 }

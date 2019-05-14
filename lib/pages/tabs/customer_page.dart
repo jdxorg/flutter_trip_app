@@ -23,6 +23,5 @@ class _State extends State<MyCustomer> with AutomaticKeepAliveClientMixin {
   @override 
   void initState(){
     super.initState();
-    print('mycustom_page initState...');
   }
 }

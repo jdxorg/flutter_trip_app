@@ -10,7 +10,10 @@ import 'package:flutter_trip_app/entity/BannerEntity.dart';
 import 'package:flutter_trip_app/entity/NavbarEntity.dart';
 import 'package:flutter_trip_app/service/BLL/tripBLL.dart';
 import 'package:flutter_trip_app/common/constraints/sys_style.dart';
-
+import 'package:flutter_trip_app/utils/log/log.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_trip_app/redux/app_state.dart';
 class MyHomePage extends StatefulWidget {
   static final String sName = 'home';
 
@@ -21,11 +24,13 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
   var _futureBuilderFuture;
 
   Future load() async {
+    var ret;
     try {
-      return await TripBLL().getHome();
+      ret = await TripBLL().getHome();
     } catch (error) {
       throw (error);
     }
+    return ret;
   }
   @override
   bool get wantKeepAlive => true;
@@ -33,7 +38,6 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
   @override
   void initState() {
     super.initState();
-    print('home_page initState...');
     ///用_futureBuilderFuture来保存load()的结果，以避免不必要的ui重绘
     _futureBuilderFuture = load();
   }
@@ -51,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
           ),
           HomeMenu(),
           SubMenu(),
-          Special()
+          Special(),
         ],
       ),
     );
@@ -60,20 +64,20 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
   Widget _buildFuture(BuildContext context, AsyncSnapshot snapshot) {
     switch (snapshot.connectionState) {
       case ConnectionState.none:
-        print('ConnectionState.none');
+        // LogUtils.i('ConnectionState.none');
         return null;
       case ConnectionState.active:
-        print('ConnectionState.active');
+        // LogUtils.i('ConnectionState.active');
         return Text('ConnectionState.active');
       case ConnectionState.waiting:
-        print('ConnectionState.waiting');
+        // LogUtils.i('ConnectionState.waiting');
         return Center(
           child: CircularProgressIndicator(),
         );
       case ConnectionState.done:
-        print('ConnectionState.done');
+        // LogUtils.i('ConnectionState.done');
         if (snapshot.hasError) return Text('Error: ${snapshot.error}');
-        Map map = snapshot.data;
+        var map = snapshot.data;
         List<BannerEntity> _banners = map['banners'];
         List<NavbarEntity> _navbars = map['navbars'];
         return buildBanner(context, banners: _banners, navbars: _navbars);

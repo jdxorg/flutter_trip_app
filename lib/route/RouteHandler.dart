@@ -8,14 +8,18 @@
  */
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_trip_app/utils/log/log.dart';
+
+import 'package:flutter_trip_app/pages/login/login.dart';
 class HandlerFactory {
   static Handler createHandler(String routeName) {
     return new Handler(
-      handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
         switch(routeName){
-          case '/':print("Root !!!");break;
+          case '/':LogUtils.i("Root !!!");break;
+          case '/login':return new LoginPage(params);break;
           default:
-            print("ROUTE WAS NOT FOUND !!!");
+            LogUtils.i("ROUTE WAS NOT FOUND !!!");
           break;
         }
       },

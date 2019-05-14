@@ -36,6 +36,8 @@ dependencies:
   connectivity: ^0.4.2
   # 添加sharedPreference依赖
   shared_preferences: ^0.5.2
+  # redux
+  flutter_redux: ^0.5.3
 
 dev_dependencies:
   flutter_test:
