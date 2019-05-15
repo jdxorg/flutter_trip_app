@@ -9,20 +9,22 @@ import 'package:flutter_trip_app/pages/widget/home/special.dart';
 import 'package:flutter_trip_app/entity/BannerEntity.dart';
 import 'package:flutter_trip_app/entity/NavbarEntity.dart';
 import 'package:flutter_trip_app/service/BLL/tripBLL.dart';
+import 'package:flutter_trip_app/widget/search_bar_widget.dart';
 import 'package:flutter_trip_app/common/constraints/sys_style.dart';
-import 'package:flutter_trip_app/utils/log/log.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
-import 'package:flutter_trip_app/redux/app_state.dart';
+
 class MyHomePage extends StatefulWidget {
   static final String sName = 'home';
 
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with AutomaticKeepAliveClientMixin {
   var _futureBuilderFuture;
-
+  ScrollController scrollController = new ScrollController();
+  double downY = 0.0;
+  double lastDownY = 0.0;
+  double lastListLength = 0.0;
   Future load() async {
     var ret;
     try {
@@ -32,31 +34,40 @@ class _MyHomePageState extends State<MyHomePage> with AutomaticKeepAliveClientMi
     }
     return ret;
   }
+
   @override
   bool get wantKeepAlive => true;
-  
+
   @override
   void initState() {
     super.initState();
+
     ///用_futureBuilderFuture来保存load()的结果，以避免不必要的ui重绘
     _futureBuilderFuture = load();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      color: Color(SysStyle.mainBackground),
-      child: ListView(
-        padding: const EdgeInsets.only(top: 0.0),
-        children: <Widget>[
-          FutureBuilder(
-            future: _futureBuilderFuture,
-            builder: _buildFuture,
-          ),
-          HomeMenu(),
-          SubMenu(),
-          Special(),
-        ],
+    return new Scaffold(
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      // ),
+      body: Container(
+        color: Color(SysStyle.mainBackground),
+        child: ListView(
+          controller: scrollController,
+          padding: const EdgeInsets.only(top: 0.0),
+          children: <Widget>[
+            FutureBuilder(
+              future: _futureBuilderFuture,
+              builder: _buildFuture,
+            ),
+            HomeMenu(),
+            SubMenu(),
+            Special(),
+            SearchBarWidget(),
+          ],
+        ),
       ),
     );
   }
